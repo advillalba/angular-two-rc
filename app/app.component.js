@@ -9,16 +9,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 // Importar el núcleo de Angular
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
+var router_deprecated_1 = require("@angular/router-deprecated");
+var restaurantes_list_component_1 = require("./components/restaurantes-list.component");
+var restaurante_details_component_1 = require("./components/restaurante-details.component");
+var restaurante_add_component_1 = require("./components/restaurante-add.component");
+var restaurante_edit_component_1 = require("./components/restaurante-edit.component");
 // Decorador component, indicamos en que etiqueta se va a cargar la plantilla
 var AppComponent = (function () {
     function AppComponent() {
+        this.titulo = "Restaurantes";
     }
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: '<h1>Hola mundo con Angular 2 RC !!</h1>'
-        }), 
+            templateUrl: "app/view/home.html",
+            directives: [restaurantes_list_component_1.RestaurantesListComponent, router_deprecated_1.ROUTER_DIRECTIVES]
+        }),
+        router_deprecated_1.RouteConfig([
+            { path: "/", name: "Home", component: restaurantes_list_component_1.RestaurantesListComponent, useAsDefault: true },
+            { path: "/restaurante/:id", name: "Restaurante", component: restaurante_details_component_1.RestauranteDetailsComponent },
+            { path: "/crear-restaurante/", name: "CrearRestaurante", component: restaurante_add_component_1.RestauranteAddComponent },
+            { path: "/editar-restaurante/:id", name: "EditarRestaurante", component: restaurante_edit_component_1.RestauranteEditComponent },
+            { path: "/donde-como-hoy/:random", name: "DondeComoHoy", component: restaurante_details_component_1.RestauranteDetailsComponent }
+        ]), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;
